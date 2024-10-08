@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { LeafletComponent } from './leaflet/leaflet.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [LeafletComponent],
   template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
+    <app-leaflet/>
   `,
   styles: [],
 })
 export class AppComponent {
-  title = 'leaflet-geojson-saudi-farming';
 }
