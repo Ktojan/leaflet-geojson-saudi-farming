@@ -35,12 +35,7 @@ h1 {
 
     .content p {
         margin-bottom: 1rem;
-    }
-
-    .content a {
-        text-decoration: none;
-        color: #fefefe;
-    }
+    }  
 
     .content h4 {
         margin-bottom: 1rem;
@@ -51,9 +46,14 @@ h1 {
         max-width: 60%;
     }
 
+    a {
+        color: #fefefe;
+        cursor: pointer;
+    }
+
     .social-media a {
         display: block;
-        margin-bottom: 1rem;       
+        line-height: 2rem;
     }
 }
 
