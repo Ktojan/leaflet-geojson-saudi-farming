@@ -1,43 +1,103 @@
-<h1 class="h1 center">Saudi Arabia (Tabuk area) map with Leaflet.js library</h1>
 
-<div id="map"></div>
-
-<footer class="new_footer_area">
-     <div class="new_footer_top">
-          <div class="footer">
-               <div class="content">
-                    <div class="details">
-                    <h4 class="address">About App</h4>
-                    <p>
-                         I'm Andrey Karpovich 🇺🇦 and this is my demo app (proof-of-concept) for usage of Leaflet.js library 
-                         (thanks for creators <a target="_blank" href="https://leafletjs.com/">leafletjs.com</a>) with GeoJson data 
-                         to display interactive map for Saudi Arabia region's  farm activities planning (moisture, NDVI indexes). 
-                         All the data is completely random.
-                    </p>
-                    <h4 class="mail">Email</h4>
-                    <p>karpovich.andrey&#64;gmail.com</p>
-                    </div>                 <div class="stack">
-                    <h4>Stack</h4>
-                    <p>Angular 18</p>
-                    <p>Leaflet.js</p>
-                    <p>GeoJSON format</p>
-                    <p>geojson.io (draw)</p>
+<div id="map" #map class="usual-border">
+     <div id="panelID" class="sidepanel" aria-label="side panel" aria-hidden="false">
+          <div class="sidepanel-inner-wrapper">
+               <nav class="sidepanel-tabs-wrapper" aria-label="sidepanel tab navigation">
+                    <ul class="sidepanel-tabs">
+                         <li class="sidepanel-tab">
+                              <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-1">
+                                   <svg xmlns="http://www.w3.org/2000/svg"  width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                              About</a>
+                         </li>
+                         <li class="sidepanel-tab">
+                              <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-2">
+                                   <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 -960 960 960"  fill="currentColor"><path d="M240-520q-83 0-141.5-58.5T40-720q0-84 58.5-142T240-920q84 0 142 58t58 142q0 83-58 141.5T240-520Zm0-80q51 0 85.5-35t34.5-85q0-51-34.5-85.5T240-840q-50 0-85 34.5T120-720q0 50 35 85t85 35ZM640-40q-33 0-56.5-23.5T560-120v-200q0-33 23.5-56.5T640-400h200q33 0 56.5 23.5T920-320v200q0 33-23.5 56.5T840-40H640Zm0-80h200v-200H640v200Zm100-100ZM240-720Zm469 68L308-252q5 12 8.5 25t3.5 27q0 50-34.5 85T200-80q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q14 0 27 3.5t25 8.5l400-401q-5-12-8.5-24.5T640-760q0-51 35-85.5t85-34.5q51 0 85.5 34.5T880-760q0 50-34.5 85T760-640q-14 0-26.5-3.5T709-652Z"/></svg>
+                              Draw</a>
+                         </li>
+                    </ul>
+               </nav>
+               <div class="sidepanel-content-wrapper">
+                    <div class="sidepanel-content">
+                         <div class="sidepanel-tab-content" data-tab-content="tab-1" id="tab-about">
+                              <p>This is mapping (GIS) demo Angular 18 app, based on the Leaflet.js and few plugins
+                                   (<a href="https://github.com/JamesLMilner/terra-draw/tree/main" target="_blank">terra-draw</a>, <a href="https://github.com/maxwell-ilai/Leaflet.SidePanel/tree/main" target="_blank">leaflet-sidepanel</a>).
+                                   The fiction tech task was to display interactive map of particular Saudi Arabia region, and visualize future
+                                   farming activities (like adding new "agro-circles"). For now the app is fully "frontendy": no servers or state preserving. All the provided "agro" data is completely random.</p>
+                              <img src="assets/about_area.png" id="about-img" />
+                              <p>Although Saudi Arabia is widely thought of as a desert, it has regions suitable for agriculture.
+                                   The major producing areas of Tabuk, Hail, and Qasim, average yields reached 8.1 tonnes per hectare (3.6 short ton/acre)<br>
+                                   In 2018, Saudi Arabia produced:</p>
+                                   <ul>
+                                        <li>1,300,000 tons of date (2nd largest producer in the world);</li>
+                                        <li>634,000 tons of watermelon;</li>
+                                        <li>624,000 tons of barley;</li>
+                                        <li>586,000 tons of wheat;</li>
+                                        <li>482,000 tons of potato;</li>                           
+                                   </ul>                              
+                              <hr>
+                              <img src="assets/moisture_index_range.png"/>
+                         </div>
+                         <div class="sidepanel-tab-content flex" data-tab-content="tab-2" id="tab-draw">
+                              <div class="flex between" style="align-items: center;">
+                                   <h3 style="margin-right: 2rem;">Draw Mode</h3>
+                                   <mat-slide-toggle [(ngModel)]="isDrawing" (change)="switchEditMode($event)"></mat-slide-toggle>
+                              </div>
+                              <div *ngIf="isDrawing" class="draw-interface">
+                                   <div class="flex">
+                                        <button *ngIf="!config.isDrawingLayer; else whenDrawing" (click)="startNewLayer()" mat-fab extended color="primary">
+                                             <mat-icon>add_box</mat-icon>
+                                             Create new
+                                        </button>
+                                        <button *ngIf="!config.isDrawingLayer && config.currentDrawObj?.features?.length > 0" (click)="exportJSONtoFIle()" mat-fab extended color="warn">
+                                             Export to geoJSON
+                                        </button>
+                                        <ng-template #whenDrawing>
+                                             <button (click)="openSaveObjectDialog()" mat-fab extended color="accent">
+                                                  <mat-icon>save</mat-icon>
+                                                  Save
+                                             </button>
+                                             <button (click)="clearEdited()" mat-fab extended color="warn">
+                                                  <mat-icon>layers_clear</mat-icon>
+                                                  Clear current
+                                             </button>
+                                        </ng-template>
+                                   </div>
+                                   <mat-button-toggle-group *ngIf="config.isDrawingLayer && config.drawFigures.length > 0" class="shape-selector" (change)="switchDrawTool()"
+                                        [(ngModel)]="config.activeDrawTool">
+                                        <mat-button-toggle *ngFor="let figure of config.drawFigures" [value]="figure">
+                                             <mat-icon aria-hidden="false" [fontIcon]="setDrawFigureIcon(figure)"></mat-icon>
+                                        </mat-button-toggle>
+                                   </mat-button-toggle-group>
+                                   <p *ngIf="isDrawing && config.activeDrawTool"><i>Selected tool: <b>{{config.activeDrawTool}}</b></i></p>
+                              </div>
+                              </div>
                     </div>
-                    <div class="social-media">
-                         <h4>Links</h4>
-                         <a target="_blank" href="https://github.com/Ktojan/leaflet-geojson-saudi-farming"
-                         >Github (code)</a>
-                         <a target="_blank" href="https://leaflet-geojson-saudi-farming.vercel.app/ "
-                         >Live Demo</a>
-                         <a target="_blank" href="https://www.linkedin.com/in/andrey-karpovich-345701131/"
-                         >My Linkedin</a>
-                         </div>               
-                    </div>             
-             </div>
+               </div>
+          </div>
+          <div class="sidepanel-toggle-container">
+               <button class="sidepanel-toggle-button" type="button" aria-label="toggle side panel"></button>
+          </div>
+     </div>
+</div>
 
-         <div class="footer_bg">
-             <div class="footer_bg_one"></div>
-             <div class="footer_bg_two"></div>
-         </div>
-     </div>    
- </footer>
+<ng-template #saveDrawnModal>
+     <h2 mat-dialog-title>New object properties</h2>
+     <mat-dialog-content>
+       <mat-form-field>
+         <mat-label>Name (blank for auto-generated)</mat-label>
+         <input matInput [(ngModel)]="config.activeDrawName" />
+       </mat-form-field>
+       <mat-form-field>
+         <mat-label>Choose a fill color</mat-label>
+         <mat-select [(ngModel)]="config.activeDrawColor">
+          @for (color of config.saveNewDrawColors; track color) {
+            <mat-option [value]="color"><i [style.background]="color" class="save-colors"></i>{{color}}</mat-option>
+          }
+        </mat-select>
+       </mat-form-field>
+     </mat-dialog-content>
+     <mat-dialog-actions>
+       <button mat-button mat-dialog-close>Cancel</button>
+       <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+     </mat-dialog-actions>
+</ng-template>
