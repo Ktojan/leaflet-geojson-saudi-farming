@@ -1,8 +1,11 @@
+
 [
   {
       "type": "Feature",
       "properties": {
-          "ndvi": -0.44
+          "ndvi": -0.44,
+          "evi": -0.66,
+          "id": "044"
       },
       "geometry": {
           "coordinates": [
@@ -31,7 +34,9 @@
   {
       "type": "Feature",
       "properties": {
-          "ndvi": -0.73
+          "ndvi": -0.73,
+          "evi": -0.98,
+          "id": "073"
       },
       "geometry": {
           "coordinates": [
@@ -77,7 +82,9 @@
   {
       "type": "Feature",
       "properties": {
-          "ndvi": 0.13
+          "ndvi": 0.13,
+          "evi": 0.195,
+          "id": "013"
       },
       "geometry": {
           "coordinates": [
@@ -123,7 +130,9 @@
   {
     "type": "Feature",
     "properties": {
-      "ndvi": 0.56
+      "ndvi": 0.56,
+      "evi": 0.84,
+       "id": "056"
     },
     "geometry": {
       "coordinates": [

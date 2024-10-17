@@ -1,20 +1,40 @@
+@use '@angular/material' as mat;
 @import '../node_modules/leaflet/dist/leaflet.css'; 
 
+$theme: mat.define-theme();
+html, body { height: 100%; }
+
 body {
+    font-family: 'Roboto', "Helvetica Neue", sans-serif;
     position: relative;
     align-content: center;
     margin: auto;
     height: 100%;
-    padding-top: 1rem;
     font-family: sans-serif;
     background-color: #f3f4f6;
+    overflow-x: hidden; //todo
 }
 
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+// --------  Some rules rewriting leaflet.css styles ------- //
+
 .info {
+    max-width: 220px;
     padding: 8px;
     font-size: 18px;
     background: rgba(255,255,255,0.8);
-    box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    box-shadow: 0 0 25px rgba(0,0,0,0.3);
     border-radius: 8px; 
     h4 {
         margin: 0 0 5px;

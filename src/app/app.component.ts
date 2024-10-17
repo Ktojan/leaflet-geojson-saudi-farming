@@ -5,10 +5,8 @@ import { LeafletComponent } from './leaflet/leaflet.component';
   selector: 'app-root',
   standalone: true,
   imports: [LeafletComponent],
-  template: `
-    <app-leaflet/>
-  `,
-  styles: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
 }
