@@ -2,17 +2,15 @@
 @import '../node_modules/leaflet/dist/leaflet.css'; 
 
 $theme: mat.define-theme();
-html, body { height: 100%; }
 
 body {
     font-family: 'Roboto', "Helvetica Neue", sans-serif;
     position: relative;
     align-content: center;
     margin: auto;
-    height: 100%;
     font-family: sans-serif;
     background-color: #f3f4f6;
-    overflow-x: hidden; //todo
+    overflow-x: hidden;
 }
 
 .flex {
@@ -26,6 +24,47 @@ body {
 .between {
     justify-content: space-between;
 }
+
+.vert-center {
+    align-items: center;
+    align-content: center;
+}
+
+.usual-border {
+    border: 3px solid gray;
+}
+
+.base-select {
+    font-size: 16px;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+// --------  Some rules rewriting mapbox-gl.css styles ------- //
+
+.mapboxgl-popup-content {
+    background: ivory;
+    border-radius: 10px;
+}
+.mapboxgl-ctrl-top-right {
+    max-width: 110px;
+    right: 5px;
+    display: flex;
+    flex-direction: column;
+
+    .mapboxgl-ctrl {
+        margin: 5px auto;
+    }    
+    .mapboxgl-ctrl-group button {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.mapboxgl-marker, .mat-mdc-chip {
+    cursor: pointer;
+}
+
 
 // --------  Some rules rewriting leaflet.css styles ------- //
 
