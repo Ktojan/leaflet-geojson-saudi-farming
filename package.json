@@ -1,6 +1,6 @@
 {
   "name": "leaflet-geojson-saudi-farming",
-  "version": "24.1.0",
+  "version": "24.2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -18,9 +18,12 @@
     "@angular/material": "^18.2.8",
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
+    "@angular/router": "^18.2.8",
     "leaflet": "^1.9.4",
-    "rxjs": "~7.8.0",
     "terra-draw": "^1.0.0-beta.5",
+    "mapbox-gl": "^2.15.0",
+    "ngx-mapbox-gl": "^11.0.1",
+    "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },
