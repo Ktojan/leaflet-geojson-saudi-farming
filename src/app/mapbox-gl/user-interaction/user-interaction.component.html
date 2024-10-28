@@ -1,0 +1,80 @@
+<mat-accordion class="accordion-content" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> LAYERS, OBJECTS </mat-panel-title>
+      <mat-panel-description>
+        Map styles, places, layers
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <label>Base map: </label>
+      <mat-radio-group [ngModel]="layerId" (ngModelChange)="changeMapTilesStyle.emit($event)">
+        <mat-radio-button value="basic">Basic</mat-radio-button>
+        <mat-radio-button value="streets">Streets (+3D)</mat-radio-button>
+        <mat-radio-button value="satellite">Satellite</mat-radio-button>
+      </mat-radio-group>
+    <hr>
+    <label>Locations: </label>
+      <mat-radio-group [ngModel]="config.currentLocation.name" (ngModelChange)="changeMapLocation.emit($event)">
+        <mat-radio-button *ngFor="let location of locations" [value]="location.name">{{location.label}}</mat-radio-button>
+      </mat-radio-group>
+    <hr>
+    <p *ngIf="config.currentLocation.layers">
+      <label>Toggle layers: </label>
+      <mat-button-toggle-group multiple>
+        <mat-button-toggle *ngFor="let layer of config.currentLocation.layers" [checked]="true"
+          [value]="layer" (change)="toggleLayer.emit($event)">
+          {{layer | uppercase}}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </p>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>INTERACTIVITY </mat-panel-title>
+      <mat-panel-description>
+        Markers, export, projections
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+      <div *ngIf="filteredCustomMarkers()?.length >0" class="flex between" style="margin-bottom: 7px;">
+        <label style="align-content: center;">{{filteredCustomMarkers().length}} markers on this location. Click to jump </label>
+        <button id="exportjson" (click)="exportJSONtoFIle.emit()" mat-fab extended color="accent">
+          Export to geoJSON
+        </button>      
+      </div>
+      <mat-form-field class="markers-form-field">
+        <mat-chip-grid #chipGrid aria-label="Enter markers" [formControl]="formControl">
+          @for (marker of filteredCustomMarkers(); let i = $index; track marker) {
+            <mat-chip (removed)="removeMarker(marker.name)" (click)="centerToMarker.emit(marker)"
+            [style.background-color]="colorShades.violet[i % 10]  || 'violet'">
+              {{marker.name}}
+              <button matChipRemove>                
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          }
+        </mat-chip-grid>
+        <input
+          placeholder="Just type the name of marker and Enter"
+          [matChipInputFor]="chipGrid"
+          (matChipInputTokenEnd)="addMarker($event)"
+        />        
+      </mat-form-field>
+    <hr>
+    <div class="flex between vert-center">
+      <div class="flex vert-center">
+        <svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 -960 960 960" width="38px" fill="white"><path d="M123-440q-1-10-1.5-20t-.5-20q0-75 28-140.5t77-114q49-48.5 114-77T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 10-.5 20t-1.5 20h-81q2-10 2.5-20t.5-20q0-10-.5-20t-2.5-20H639q1 10 1 20v40q0 10-1 20h-79v-33q0-12-.5-24t-1.5-23H403q-1 11-1.5 23t-.5 24v33h-79q-1-10-1-20v-40q0-10 1-20H204q-2 10-2.5 20t-.5 20q0 10 .5 20t2.5 20h-81Zm105-160h103q8-43 20-77.5t26-62.5q-48 18-87 54.5T228-600Zm186 0h132q-10-43-25-84t-41-76q-26 35-41.5 76T414-600Zm216 0h103q-23-49-62.5-85.5T583-740q14 30 26.5 63.5T630-600ZM440-120v-40q0-50-35-85t-85-35H80v-80h240q48 0 89.5 21t70.5 59q29-38 70.5-59t89.5-21h240v80H640q-50 0-85 35t-35 85v40h-80Z"/></svg>
+          <mat-label style="margin: 0 5px 0 10px;">Map projection</mat-label>
+          <select class="base-select" (change)="changeProjection.emit($event)">
+            @for (projection of projections; track projection) {
+            <option [value]="projection.name" [selected]="projection.name === config.projection.name">
+              {{projectionLabels[projection.name] || projection.name}}</option>
+            }
+          </select>
+      </div>    
+      <button (click)="toggleFloating.emit()" mat-stroked-button >
+        {{ isFloating ? 'Finish flight' : 'Lets fly a bit!'}}
+      </button>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>
