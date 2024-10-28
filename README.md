@@ -1,7 +1,7 @@
 # LeafletGeojsonSaudiFarming
 
-This is my demo app version 24.1.0 (proof-of-concept) based on Leaflet.js library (thanks to the creators https://leafletjs.com/) with GeoJson data to display an interactive map for Saudi Arabia region's farm activities planning. 
-All the data is completely "science fiction". Created in October 2024.
+This is my demo app version 24.2.0 (proof-of-concept) based on Leaflet.js library (thanks to the creators https://leafletjs.com/) and Mapbox API (wrapped in https://github.com/Wykks/ngx-mapbox-gl by Wykks for Angular apps). For Mapbox you'll need your public API token (free for 1 month trial)
+AllMost of the data in app is "science fiction". Created in October 2024.
 
 Live demo on Vercel: https://leaflet-geojson-saudi-farming.vercel.app/ 
 
