@@ -4,7 +4,6 @@ header {
     justify-content: start;
     align-items: center;
     padding: 1rem 4rem;
-    margin-bottom: 2rem;
     height: 5vh;
     width: 100%;
     background-color: #224f34;
@@ -16,6 +15,44 @@ header {
         margin-left: 1rem;
     }
 }
+
+article {
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+    height: 80vh;
+    width: 90vw;
+    margin-bottom: 2rem;
+}
+
+.navigation {
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: xx-large;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+
+    li {
+        margin-right: 4rem;
+    }
+}
+
+.active {
+    font-size: 40px;
+    font-weight: bold;
+}
+
 
 /// ------   Footer ------- ///
 .new_footer_area {
