@@ -3,6 +3,10 @@
 
 $theme: mat.define-theme();
 
+html {
+  --mat-expansion-header-collapsed-state-height: 40px; //todo
+}
+
 body {
     font-family: 'Roboto', "Helvetica Neue", sans-serif;
     position: relative;
